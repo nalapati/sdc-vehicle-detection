@@ -21,6 +21,14 @@ A feature vector(8480 size) = | color features (32x32) | hog features (1764x3) |
 ```
 
 ![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/car_non_car.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/hog_features_l.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/hog_features_r.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/hog_features_g.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/hog_features_b.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/n_hog_features_r.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/n_hog_features_g.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/n_hog_features_b.jpg)
+
 
 ### Training a classifier using HOG features
 In the notebook cells:
@@ -44,12 +52,25 @@ windows = (
     )
 ```
 
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_bb.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_32_32.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_48_48.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_64_64.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_96_96.jpg)
+
 ### Sliding Window Search in Action
 In the notebook cells:
 
 HOG features alone had an accuracy of 98.3% augmented with color and histogram features bumped the accuracy to 99.6%. In addition to this, heatmaps were generated from the input image. Essentially increment a pixel in the red channel of a reference matrix if the pixel is within a bounding box that contains a car. Heatmaps are generated over bounding boxes over multiple frames of sliding window search. Thresholding is applied on pixel intensities, such that pixel values below the thresholds are zeroed out. The final bounding boxes are determined by labelling connected components in the reference matrix. The bounding boxes surrounding the connected components are then overlayed on original image. This test video best illustrates the search in action. 
 
-Click:
+Sliding Window samples:
+
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_windows_with_car_result.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/heatmap_gray_thresholded.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/car_labeled.jpg)
+
+Click on the image for the Youtube Video:
+
 [![Poject Video Output](https://img.youtube.com/vi/mEcZCQf_txk/0.jpg)](https://www.youtube.com/watch?v=mEcZCQf_txk)
 
 ## Video Implementation
@@ -87,7 +108,8 @@ Before implementing all the features the order in which this project was really 
 The final pipeline evaluates the search on every alternate frame in the video, and applies a threshold of 8 on the heatmap generated from detections on 10 consecutive frames. Essentially a car needs to be found 8 out of 10 frames around the same area for it to be considered a detection. (The camera runs at ~20fps, so you have 20frames in a single second of very similar data.). This worked well in the project video output.
 
 ### Project Video Output
-Click:
+Click on the image for the Youtube Video:
+
 [![Poject Video Output](https://img.youtube.com/vi/w8qakmP1gSM/0.jpg)](https://www.youtube.com/watch?v=w8qakmP1gSM)
 
 ## Discussion
@@ -103,6 +125,5 @@ Click:
 
 ### Improvements
 * Deep learning for better features for vehicle detection, we don't necessarily have to use a deep network, but a couple of convolutional layers could be used as encoders for the image to be used in detection. (Potentially GANs for robust car detection).
-* Sequence models could work better on the time series data in a window, we could potentially do away with overlapping windows and have non overlappting windows activating if a car passes through it, using timeseries data in that window.
+* Sequence models could work better on the time series data in a window, we could potentially do away with overlapping windows and have non overlapping windows activating if a car passes through it, using timeseries data in that window.
 * A LOT more data, using mechanical turk to label car video data or the udacity dataset to make the classifier more robust.
-
