@@ -49,6 +49,8 @@ And lastly histograms from the RGB channels are used as additional features in c
 A feature vector(8480 size) = | color features (32x32) | hog features (1764x3) | color histograms (32x3) |
 ```
 
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-advanced-lane-finding/master/car_non_car.jpg)
+
 ### Training a classifier using HOG features
 In the notebook cells:
 
@@ -76,6 +78,9 @@ In the notebook cells:
 
 HOG features alone had an accuracy of 98.3% augmented with color and histogram features bumped the accuracy to 99.6%. In addition to this, heatmaps were generated from the input image. Essentially increment a pixel in the red channel of a reference matrix if the pixel is within a bounding box that contains a car. Heatmaps are generated over bounding boxes over multiple frames of sliding window search. Thresholding is applied on pixel intensities, such that pixel values below the thresholds are zeroed out. The final bounding boxes are determined by labelling connected components in the reference matrix. The bounding boxes surrounding the connected components are then overlayed on original image. This test video best illustrates the search in action. 
 
+Click:
+[![Poject Video Output](https://img.youtube.com/vi/mEcZCQf_txk/0.jpg)](https://www.youtube.com/watch?v=mEcZCQf_txk)
+
 ## Video Implementation
 
 ### Method for handling false positives
@@ -83,7 +88,7 @@ The final pipeline evaluates the search on every alternate frame in the video, a
 
 ### Project Video Output
 Click:
-[![Poject Video Output](https://img.youtube.com/vi//0.jpg)](https://www.youtube.com/watch?v=BC3zekFsyYU)
+[![Poject Video Output](https://img.youtube.com/vi/w8qakmP1gSM/0.jpg)](https://www.youtube.com/watch?v=w8qakmP1gSM)
 
 ## Discussion
 
