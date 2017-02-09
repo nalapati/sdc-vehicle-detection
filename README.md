@@ -12,7 +12,7 @@ First I visualized HOG features with the default parameters suggested on the pro
 
 I chose the RGB space rather than HLS for HOG extraction, the L space returns really good features, but the H and S spaces were very noisy.
 
-The window size over which features are extracted is (64x64), this window is downsampled to (32x32) and teh raw RGB values from the image are used as color features.
+The window size over which features are extracted is (64x64), this window is downsampled to (32x32) and the raw RGB values from the image are used as color features.
 
 And lastly histograms from the RGB channels are used as additional features in classification.
 
@@ -33,7 +33,7 @@ A feature vector(8480 size) = | color features (32x32) | hog features (1764x3) |
 ### Training a classifier using HOG features
 In the notebook cells:
 
-The features were then extracted over the vehicle/non-vehicles KITTI dataset. The features were split 80/20 train and test. The dataset was augmented with non-car images from trees, roadside trees have vertical edges which worked well to reduce the false positive rate. An SVM linear classifier was used to fit the training data and was then evaluated on the test data. The resulting classifier has an accuracy of 99.6%. 
+The features were then extracted over the vehicle/non-vehicles KITTI dataset. The features were shuffled and split 80/20 train and test. The dataset was augmented with non-car images from trees, roadside trees have vertical edges which worked well to reduce the false positive rate. An SVM linear classifier was used to fit the training data and was then evaluated on the test data. The resulting classifier has an accuracy of 99.6%. 
 ``NOTE: Features were normalized using a StandardScaler for both train, test and subsequently in the video pipeline.``
 
 ## Sliding Window Search
@@ -41,7 +41,7 @@ The features were then extracted over the vehicle/non-vehicles KITTI dataset. Th
 ### Scales and Overlap
 In the notebook cells:
 
-First windows were drawn on an image manually to get a sense of size of the window wrt the entire image and cars at different points in the image. Next, intuitively made sense to use smaller windows close to the center of the image and larger windows further away from the center. The top half of the image is ignored and so are vehicles very far away(really small windows). The (1280, 720) sized images were reduced to (640, 360). Next, I decided overlap based on experimentation, too far away boxes lead to not detecting cars and too close boxes increase computational overhead (In hindsight it might be better to simply translate test images and augment the dataset rather than control window overlap too much). Once the windows and search configuration was determined, search was conducted and features were extracted from bounding boxes and classified as containing cars and the bounding boxes coordinates were recorded.
+First windows were drawn on an image manually to get a sense of size of the window wrt the entire image and cars at different points in the image. Next, intuitively made sense to use smaller windows close to the center of the image and larger windows further away from the center. The top half of the image is ignored and so are vehicles very far away(really small windows). The (1280, 720) sized images were reduced to (640, 360). Next, I decided overlap based on experimentation, too low overlap leads to not detecting cars and too high overlap increases computational overhead (In hindsight it might be better to simply translate test images and augment the dataset rather than control window overlap too much). Once the windows and search configuration was determined, search was conducted and features were extracted from bounding boxes and classified as containing cars and the bounding boxes coordinates were recorded.
 
 ```
 windows = (
@@ -61,7 +61,7 @@ windows = (
 ### Sliding Window Search in Action
 In the notebook cells:
 
-HOG features alone had an accuracy of 98.3% augmented with color and histogram features bumped the accuracy to 99.6%. In addition to this, heatmaps were generated from the input image. Essentially increment a pixel in the red channel of a reference matrix if the pixel is within a bounding box that contains a car. Heatmaps are generated over bounding boxes over multiple frames of sliding window search. Thresholding is applied on pixel intensities, such that pixel values below the thresholds are zeroed out. The final bounding boxes are determined by labelling connected components in the reference matrix. The bounding boxes surrounding the connected components are then overlayed on original image. This test video best illustrates the search in action. 
+HOG features alone had an accuracy of 98.3% augmented with color and histogram features bumped the accuracy to 99.6%. In addition to this, heatmaps were generated from the input image. Essentially increment a pixel in the red channel of a reference matrix if the pixel is within a bounding box that contains a car. Heatmaps are generated over bounding boxes over multiple frames of sliding window search. Thresholding is applied on pixel intensities, such that pixel values below the thresholds are zeroed out. The final bounding boxes are determined by labelling connected components in the reference matrix. The bounding boxes surrounding the connected components are then overlayed on original image. The test video at the end of this section best illustrates the search in action. 
 
 Sliding Window samples:
 
