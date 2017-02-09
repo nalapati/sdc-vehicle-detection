@@ -3,9 +3,10 @@
 
 This project implements a software pipeline to identify vehicles in a video.
 
-## Histogram of Oriented Gradients (HOG)/Color
+## Feature Extraction and Classifer
+For features in the car/not car classifier I used HOG/color/color histogram features, and I the model was trained using SVMs.
 
-### HOG/Color/Spatial Bin Feature Extraction
+### Histogram of Oriented Gradients HOG/Color/Spatial Bin Feature Extraction
 In the notebook cells numbered: 24, 5, 6
 
 First I visualized HOG features with the default parameters suggested on the project spec. They looked really reasonable, tuning down the number of pixels per cell from 8 to 6(and alternatively increasing cells per block) added a lot of noise to the feature extraction process and there was not a lot of activity of gradients along specific directions, i.e. I was losing information on directionlity of the edge. It would result in very bright points. I used the default parameters orientations=9, pixels_per_cell=8, cells_per_block=2. Setting number of pixels per cell too large seemed to effect signals from near vertical edges.
@@ -37,6 +38,7 @@ The features were then extracted over the vehicle/non-vehicles KITTI dataset. Th
 ``NOTE: Features were normalized using a StandardScaler for both train, test and subsequently in the video pipeline.``
 
 ## Sliding Window Search
+This section deals with the components to search an image for sections that contain cars.
 
 ### Scales and Overlap
 In the notebook cells numbered: 22, 10, 11
@@ -73,7 +75,7 @@ Click on the image for the Youtube Video:
 
 [![Poject Video Output](https://img.youtube.com/vi/mEcZCQf_txk/0.jpg)](https://www.youtube.com/watch?v=mEcZCQf_txk)
 
-## Video Implementation
+## Video Pipeline Implementation
 In the notebook in cells numbered: 16, 17, 18, 19, 21
 
 ### Implementation Sequence
