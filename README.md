@@ -6,10 +6,10 @@ This project implements a software pipeline to identify vehicles in a video.
 ## Feature Extraction and Classifer
 This section discusses the features and classifier used in the vehicle/not vehicle classifier I used HOG/color/color histogram features, and the model was trained using SVMs.
 
-### Histogram of Oriented Gradients HOG/Color/Spatial Bin Feature Extraction
+### Histogram of Oriented Gradients HOG/Color Values/Color Histogram Feature Extraction
 In the notebook cells numbered: 24, 5, 6
 
-First I experimented with HOG features with the default parameters suggested on the project spec. They looked really good, tuning down the number of pixels per cell from 8 to 6(and alternatively increasing cells per block) added a lot of noise to the feature extraction process and there was not a lot of activity of gradients along specific directions, i.e. I was losing information on directionlity of the edge. It would result in very bright points. I used the default parameters orientations=9, pixels_per_cell=8, cells_per_block=2. Setting number of pixels per cell too large seemed to effect signals from near vertical edges.
+First I extracted HOG features with the default parameters suggested on the project spec. They looked really good, tuning down the number of pixels per cell from 8 to 6(and alternatively increasing cells per block) added a lot of noise to the feature extraction process and there was not a lot of activity of gradients along specific directions, i.e. I was losing information on directionlity of the edge. It would result in very bright points. I used the default parameters orientations=9, pixels_per_cell=8, cells_per_block=2. Setting number of pixels per cell too large seemed to effect signals from near vertical edges.
 
 I chose the RGB space rather than HLS for HOG extraction, the L space returns really good features, but the H and S spaces were very noisy. HOG features are extracted on the R,G,B channels in the image.
 
