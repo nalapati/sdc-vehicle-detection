@@ -9,11 +9,11 @@ This section discusses the features and classifier used in the vehicle/not vehic
 ### Histogram of Oriented Gradients HOG/Color/Spatial Bin Feature Extraction
 In the notebook cells numbered: 24, 5, 6
 
-First I visualized HOG features with the default parameters suggested on the project spec. They looked really reasonable, tuning down the number of pixels per cell from 8 to 6(and alternatively increasing cells per block) added a lot of noise to the feature extraction process and there was not a lot of activity of gradients along specific directions, i.e. I was losing information on directionlity of the edge. It would result in very bright points. I used the default parameters orientations=9, pixels_per_cell=8, cells_per_block=2. Setting number of pixels per cell too large seemed to effect signals from near vertical edges.
+First I experimented with HOG features with the default parameters suggested on the project spec. They looked really good, tuning down the number of pixels per cell from 8 to 6(and alternatively increasing cells per block) added a lot of noise to the feature extraction process and there was not a lot of activity of gradients along specific directions, i.e. I was losing information on directionlity of the edge. It would result in very bright points. I used the default parameters orientations=9, pixels_per_cell=8, cells_per_block=2. Setting number of pixels per cell too large seemed to effect signals from near vertical edges.
 
-I chose the RGB space rather than HLS for HOG extraction, the L space returns really good features, but the H and S spaces were very noisy.
+I chose the RGB space rather than HLS for HOG extraction, the L space returns really good features, but the H and S spaces were very noisy. HOG features are extracted on the R,G,B channels in the image.
 
-The window size over which features are extracted is (64x64), this window is downsampled to (32x32) and the raw RGB values from the image are used as color features.
+The input window size over which features are extracted is a (64x64) section of the image, this window is downsampled to (32x32) and the raw RGB values from the image are used as color features.
 
 And lastly histograms from the RGB channels are used as additional features in classification.
 
