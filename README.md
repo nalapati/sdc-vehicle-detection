@@ -3,35 +3,6 @@
 
 This project implements a software pipeline to identify vehicles in a video.
 
-## Implementation Sequence
-
-### Iteration 1
-Before implementing all the features the order in which this project was really implemented:
-* Car/Non Car sample plots.
-* Simple HOG feature extraction.
-* Use the KITTI dataset to build a simple SVM model.
-* Test model on sample images.
-* Run a simple sliding window in a specific section of the image to retrieve bounding boxes.
-* Detect bounding boxes in a video in a pipeline with a really low threshold (i.e. allow false positives)
-
-### Iteration 2
-* Cracking down on accuracy, the first model had a test accuracy of 98.3%, downsampled the image and used the raw pixel values from the RGB image + color histograms in a window to augment HOG features leading to 99.6% accuracy.
-* Tested the new SVM model on new images.
-
-### Iteration 3
-* Explored different scale and sizes of windows and locations in the image and overlap in these windows.
-* Tested the pipeline end to end allowing for false positives.
-
-### Iteration 4
-* Heatmaps using consecutive frames and removing areas with low ``heat`` values. This cuts down false positives after a bit of tuning.
-* Tested the video end to end to get reasonable results.
-
-### Iteration 5
-* The pipeline was really slow, cut down evaluation to running the algo on every alternate frame. The code processes frames at 2.5fps, can be easily improved to a lot higher rate.
-
-### Iteration 6
-* Focus on trees, the vertical edges and side backgrounds caused a lot of false positives causing the detector to think, trees were cars. I collected data on trees and augmented the KITTI dataset to drastically reduce false positive due to trees. 
-
 ## Histogram of Oriented Gradients (HOG)/Color
 
 ### HOG/Color/Spatial Bin Feature Extraction
@@ -49,7 +20,7 @@ And lastly histograms from the RGB channels are used as additional features in c
 A feature vector(8480 size) = | color features (32x32) | hog features (1764x3) | color histograms (32x3) |
 ```
 
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-advanced-lane-finding/master/car_non_car.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/car_non_car.jpg)
 
 ### Training a classifier using HOG features
 In the notebook cells:
@@ -82,6 +53,35 @@ Click:
 [![Poject Video Output](https://img.youtube.com/vi/mEcZCQf_txk/0.jpg)](https://www.youtube.com/watch?v=mEcZCQf_txk)
 
 ## Video Implementation
+
+### Implementation Sequence
+
+#### Iteration 1
+Before implementing all the features the order in which this project was really implemented:
+* Car/Non Car sample plots.
+* Simple HOG feature extraction.
+* Use the KITTI dataset to build a simple SVM model.
+* Test model on sample images.
+* Run a simple sliding window in a specific section of the image to retrieve bounding boxes.
+* Detect bounding boxes in a video in a pipeline with a really low threshold (i.e. allow false positives)
+
+#### Iteration 2
+* Cracking down on accuracy, the first model had a test accuracy of 98.3%, downsampled the image and used the raw pixel values from the RGB image + color histograms in a window to augment HOG features leading to 99.6% accuracy.
+* Tested the new SVM model on new images.
+
+#### Iteration 3
+* Explored different scale and sizes of windows and locations in the image and overlap in these windows.
+* Tested the pipeline end to end allowing for false positives.
+
+#### Iteration 4
+* Heatmaps using consecutive frames and removing areas with low ``heat`` values. This cuts down false positives after a bit of tuning.
+* Tested the video end to end to get reasonable results.
+
+#### Iteration 5
+* The pipeline was really slow, cut down evaluation to running the algo on every alternate frame. The code processes frames at 2.5fps, can be easily improved to a lot higher rate.
+
+#### Iteration 6
+* Focus on trees, the vertical edges and side backgrounds caused a lot of false positives causing the detector to think, trees were cars. I collected data on trees and augmented the KITTI dataset to drastically reduce false positive due to trees. 
 
 ### Method for handling false positives
 The final pipeline evaluates the search on every alternate frame in the video, and applies a threshold of 8 on the heatmap generated from detections on 10 consecutive frames. Essentially a car needs to be found 8 out of 10 frames around the same area for it to be considered a detection. (The camera runs at ~20fps, so you have 20frames in a single second of very similar data.). This worked well in the project video output.
