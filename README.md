@@ -4,7 +4,7 @@
 This project implements a software pipeline to identify vehicles in a video.
 
 ## Feature Extraction and Classifer
-For features in the car/not car classifier I used HOG/color/color histogram features, and I the model was trained using SVMs.
+This section discusses the features and classifier used in the vehicle/not vehicle classifier I used HOG/color/color histogram features, and the model was trained using SVMs.
 
 ### Histogram of Oriented Gradients HOG/Color/Spatial Bin Feature Extraction
 In the notebook cells numbered: 24, 5, 6
