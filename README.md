@@ -21,14 +21,14 @@ And lastly histograms from the RGB channels are used as additional features in c
 A feature vector(8480 size) = | color features (32x32) | hog features (1764x3) | color histograms (32x3) |
 ```
 
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/car_non_car.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/hog_features_l.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/hog_features_r.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/hog_features_g.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/hog_features_b.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/n_hog_features_r.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/n_hog_features_g.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/n_hog_features_b.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/car_non_car.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/hog_features_l.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/hog_features_r.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/hog_features_g.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/hog_features_b.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/n_hog_features_r.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/n_hog_features_g.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/n_hog_features_b.jpg)
 
 
 ### Training a classifier using HOG features
@@ -54,11 +54,11 @@ windows = (
     )
 ```
 
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_bb.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_32_32.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_48_48.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_64_64.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_96_96.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/test_bb.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/test_32_32.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/test_48_48.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/test_64_64.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/test_96_96.jpg)
 
 ### Sliding Window Search in Action
 In the notebook cells numbered: 12, 13, 14, 15
@@ -67,9 +67,9 @@ HOG features alone had an accuracy of 98.3% augmented with color and histogram f
 
 Sliding Window samples:
 
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/test_windows_with_car_result.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/heatmap_gray_thresholded.jpg)
-![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/car_labeled.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/test_windows_with_car_result.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/heatmap_gray_thresholded.jpg)
+![alt tag](https://raw.githubusercontent.com/nalapati/sdc-vehicle-detection/master/images/car_labeled.jpg)
 
 Click on the image for the Youtube Video:
 
